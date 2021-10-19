@@ -1,4 +1,3 @@
-*.pickle
-webstorage.yml
-credentials.json
+secret/
 __pycache__
+.env

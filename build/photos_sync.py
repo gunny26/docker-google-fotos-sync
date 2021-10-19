@@ -72,7 +72,7 @@ def main():
         local_ids = get_ids(client, BUCKET_NAME)
         logging.info(f"there are {len(local_ids)} items already stored in FileStorage")
         logging.info("iterating over photos")
-        while results.get("nextPageToken"): # as long as there are more pages
+        while results.get("nextPageToken"):  # as long as there are more pages
             for item in items:
                 try:
                     logging.debug(json.dumps(item, indent=4))
