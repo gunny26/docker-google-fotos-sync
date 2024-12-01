@@ -1,0 +1,5 @@
+boto3
+google-api-python-client
+google_auth_oauthlib
+prometheus_client
+webstorageS3>=1.0.0

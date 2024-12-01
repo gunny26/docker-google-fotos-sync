@@ -1,0 +1,323 @@
+docker-google-fotos-sync
+[master d479f07] automatic pre deployment commit
+ 2 files changed, 45 insertions(+), 25 deletions(-)
+ create mode 100644 stable.tmp
+using 2024-11-30-b5ed8c5
+Sending build context to Docker daemon  820.7kB
+Step 1/22 : FROM ubuntu:24.04
+24.04: Pulling from library/ubuntu
+Digest: sha256:278628f08d4979fb9af9ead44277dbc9c92c2465922310916ad0c46ec9999295
+Status: Downloaded newer image for ubuntu:24.04
+ ---> 2d4e6732b03f
+Step 2/22 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 4597c87c264d
+Step 3/22 : ENV TZ=Europe/Vienna
+ ---> Using cache
+ ---> 5bf920f9131a
+Step 4/22 : RUN apt update && apt -y --no-install-recommends upgrade
+ ---> Using cache
+ ---> 3d9bdcfc07ad
+Step 5/22 : RUN apt install --no-install-recommends -y     tzdata     python3-setuptools     python3-pip     python3-requests     python3-yaml     python3-boto3     python3-dateutil
+ ---> Using cache
+ ---> de967061d3b7
+Step 6/22 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> bc73510cd778
+Step 7/22 : RUN mkdir /usr/src/app/data && chown -R ubuntu /usr/src/app
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in 910827bbcb0b
+Removing intermediate container 910827bbcb0b
+ ---> de1952c9f417
+Step 8/22 : COPY ./build/requirements.txt /usr/src/app/
+ ---> 54de0d5d5624
+Step 9/22 : COPY ./build/webstorageS3-1.2.1-py3-none-any.whl /usr/src/app/
+ ---> 7531e7076062
+Step 10/22 : RUN pip3 install --break-system-packages --disable-pip-version-check --no-cache-dir ./webstorageS3-1.2.1-py3-none-any.whl
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in fc4cd26d3e56
+Processing ./webstorageS3-1.2.1-py3-none-any.whl
+Installing collected packages: webstorageS3
+Successfully installed webstorageS3-1.2.1
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRemoving intermediate container fc4cd26d3e56
+ ---> 75fa1e4d94f9
+Step 11/22 : RUN pip3 install --break-system-packages --disable-pip-version-check --no-cache-dir -r requirements.txt
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in 8b45992d1535
+Requirement already satisfied: boto3 in /usr/lib/python3/dist-packages (from -r requirements.txt (line 1)) (1.34.46)
+Collecting google-api-python-client (from -r requirements.txt (line 2))
+  Downloading google_api_python_client-2.154.0-py2.py3-none-any.whl.metadata (6.7 kB)
+Collecting google_auth_oauthlib (from -r requirements.txt (line 3))
+  Downloading google_auth_oauthlib-1.2.1-py2.py3-none-any.whl.metadata (2.7 kB)
+Collecting prometheus_client (from -r requirements.txt (line 4))
+  Downloading prometheus_client-0.21.0-py3-none-any.whl.metadata (1.8 kB)
+Requirement already satisfied: webstorageS3>=1.0.0 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 5)) (1.2.1)
+Collecting httplib2<1.dev0,>=0.19.0 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading httplib2-0.22.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading google_auth-2.36.0-py2.py3-none-any.whl.metadata (4.7 kB)
+Collecting google-auth-httplib2<1.0.0,>=0.2.0 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading google_auth_httplib2-0.2.0-py2.py3-none-any.whl.metadata (2.2 kB)
+Collecting google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading google_api_core-2.23.0-py3-none-any.whl.metadata (3.0 kB)
+Collecting uritemplate<5,>=3.0.1 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading uritemplate-4.1.1-py2.py3-none-any.whl.metadata (2.9 kB)
+Collecting requests-oauthlib>=0.7.0 (from google_auth_oauthlib->-r requirements.txt (line 3))
+  Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl.metadata (11 kB)
+Collecting googleapis-common-protos<2.0.dev0,>=1.56.2 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
+  Downloading googleapis_common_protos-1.66.0-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<6.0.0.dev0,>=3.19.5 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
+  Downloading protobuf-5.29.0-cp38-abi3-manylinux2014_aarch64.whl.metadata (592 bytes)
+Collecting proto-plus<2.0.0dev,>=1.22.3 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
+  Downloading proto_plus-1.25.0-py3-none-any.whl.metadata (2.2 kB)
+Requirement already satisfied: requests<3.0.0.dev0,>=2.18.0 in /usr/lib/python3/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2)) (2.31.0)
+Collecting cachetools<6.0,>=2.0.0 (from google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading cachetools-5.5.0-py3-none-any.whl.metadata (5.3 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading pyasn1_modules-0.4.1-py3-none-any.whl.metadata (3.5 kB)
+Collecting rsa<5,>=3.1.4 (from google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading rsa-4.9-py3-none-any.whl.metadata (4.2 kB)
+Collecting pyparsing!=3.0.0,!=3.0.1,!=3.0.2,!=3.0.3,<4,>=2.4.2 (from httplib2<1.dev0,>=0.19.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading pyparsing-3.2.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting oauthlib>=3.0.0 (from requests-oauthlib>=0.7.0->google_auth_oauthlib->-r requirements.txt (line 3))
+  Downloading oauthlib-3.2.2-py3-none-any.whl.metadata (7.5 kB)
+Collecting pyasn1<0.7.0,>=0.4.6 (from pyasn1-modules>=0.2.1->google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+Downloading google_api_python_client-2.154.0-py2.py3-none-any.whl (12.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 1.1 MB/s eta 0:00:00
+Downloading google_auth_oauthlib-1.2.1-py2.py3-none-any.whl (24 kB)
+Downloading prometheus_client-0.21.0-py3-none-any.whl (54 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.7/54.7 kB 2.2 MB/s eta 0:00:00
+Downloading google_api_core-2.23.0-py3-none-any.whl (156 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 156.6/156.6 kB 1.6 MB/s eta 0:00:00
+Downloading google_auth-2.36.0-py2.py3-none-any.whl (209 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 209.5/209.5 kB 1.4 MB/s eta 0:00:00
+Downloading google_auth_httplib2-0.2.0-py2.py3-none-any.whl (9.3 kB)
+Downloading httplib2-0.22.0-py3-none-any.whl (96 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.9/96.9 kB 1.4 MB/s eta 0:00:00
+Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
+Downloading uritemplate-4.1.1-py2.py3-none-any.whl (10 kB)
+Downloading cachetools-5.5.0-py3-none-any.whl (9.5 kB)
+Downloading googleapis_common_protos-1.66.0-py2.py3-none-any.whl (221 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 221.7/221.7 kB 1.4 MB/s eta 0:00:00
+Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.7/151.7 kB 1.6 MB/s eta 0:00:00
+Downloading proto_plus-1.25.0-py3-none-any.whl (50 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 kB 2.2 MB/s eta 0:00:00
+Downloading protobuf-5.29.0-cp38-abi3-manylinux2014_aarch64.whl (319 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 319.6/319.6 kB 1.3 MB/s eta 0:00:00
+Downloading pyasn1_modules-0.4.1-py3-none-any.whl (181 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.5/181.5 kB 1.7 MB/s eta 0:00:00
+Downloading pyparsing-3.2.0-py3-none-any.whl (106 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 1.5 MB/s eta 0:00:00
+Downloading rsa-4.9-py3-none-any.whl (34 kB)
+Downloading pyasn1-0.6.1-py3-none-any.whl (83 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.1/83.1 kB 2.7 MB/s eta 0:00:00
+Installing collected packages: uritemplate, pyparsing, pyasn1, protobuf, prometheus_client, oauthlib, cachetools, rsa, requests-oauthlib, pyasn1-modules, proto-plus, httplib2, googleapis-common-protos, google-auth, google_auth_oauthlib, google-auth-httplib2, google-api-core, google-api-python-client
+Successfully installed cachetools-5.5.0 google-api-core-2.23.0 google-api-python-client-2.154.0 google-auth-2.36.0 google-auth-httplib2-0.2.0 google_auth_oauthlib-1.2.1 googleapis-common-protos-1.66.0 httplib2-0.22.0 oauthlib-3.2.2 prometheus_client-0.21.0 proto-plus-1.25.0 protobuf-5.29.0 pyasn1-0.6.1 pyasn1-modules-0.4.1 pyparsing-3.2.0 requests-oauthlib-2.0.0 rsa-4.9 uritemplate-4.1.1
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRemoving intermediate container 8b45992d1535
+ ---> c94530e3c8ca
+Step 12/22 : RUN pip3 freeze
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in 2db34e97e243
+boto3==1.34.46
+botocore==1.34.46
+cachetools==5.5.0
+certifi==2023.11.17
+chardet==5.2.0
+google-api-core==2.23.0
+google-api-python-client==2.154.0
+google-auth==2.36.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.1
+googleapis-common-protos==1.66.0
+httplib2==0.22.0
+idna==3.6
+jmespath==1.0.1
+oauthlib==3.2.2
+prometheus_client==0.21.0
+proto-plus==1.25.0
+protobuf==5.29.0
+pyasn1==0.6.1
+pyasn1_modules==0.4.1
+pyparsing==3.2.0
+python-dateutil==2.8.2
+PyYAML==6.0.1
+requests==2.31.0
+requests-oauthlib==2.0.0
+rsa==4.9
+s3transfer==0.10.1
+setuptools==68.1.2
+six==1.16.0
+uritemplate==4.1.1
+urllib3==2.0.7
+webstorageS3 @ file:///usr/src/app/webstorageS3-1.2.1-py3-none-any.whl#sha256=315dbd7f087845f1849185b8afd5f5710fedb7c4ce2fa65052ab448d597cc38f
+wheel==0.42.0
+Removing intermediate container 2db34e97e243
+ ---> 3b9e1ddcd478
+Step 13/22 : RUN apt -y purge python3-pip python3-setuptools;     apt -y autoremove;     apt -y clean; rm /usr/src/app/webstorageS3-1.2.1-py3-none-any.whl
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in 556b5e523c08
+[91m
+[0m[91mWARNING: [0m[91mapt [0m[91mdoes not have a stable CLI interface. Use with caution in scripts.[0m[91m
+[0m[91m
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following package was automatically installed and is no longer required:
+  python3-wheel
+Use 'apt autoremove' to remove it.
+The following packages will be REMOVED:
+  python3-pip* python3-setuptools*
+0 upgraded, 0 newly installed, 2 to remove and 0 not upgraded.
+After this operation, 9275 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 10116 files and directories currently installed.)
+Removing python3-pip (24.0+dfsg-1ubuntu1.1) ...
+Removing python3-setuptools (68.1.2-2ubuntu1.1) ...
+[91m
+[0m[91mWARNING: [0m[91mapt [0m[91mdoes not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
+[0m[91m
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  python3-wheel
+0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+After this operation, 244 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 9230 files and directories currently installed.)
+Removing python3-wheel (0.42.0-2) ...
+[91m
+[0m[91mWARNING: [0m[91mapt[0m[91m does not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
+[0m[91m
+[0mRemoving intermediate container 556b5e523c08
+ ---> 58c940876c14
+Step 14/22 : RUN mkdir /home/ubuntu/.webstorage
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in a3a4b8aeb467
+Removing intermediate container a3a4b8aeb467
+ ---> 97e2922c0e68
+Step 15/22 : COPY ./secret/webstorage.yml /home/ubuntu/.webstorage/webstorage.yml
+ ---> aca753574f22
+Step 16/22 : COPY ./secret/credentials.json /usr/src/app/credentials.json
+ ---> fc3b6131d4df
+Step 17/22 : COPY ./secret/photoslibrary.pickle /usr/src/app/photoslibrary.pickle
+ ---> 24c00d25c01e
+Step 18/22 : COPY ./build/tools.py /usr/src/app/tools.py
+ ---> 895c4ce15e6e
+Step 19/22 : COPY ./build/main.py /usr/src/app/main.py
+ ---> dc79b5623779
+Step 20/22 : RUN chown -R ubuntu /usr/src/app
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in 33261bc8933f
+Removing intermediate container 33261bc8933f
+ ---> fa0360ccf0a9
+Step 21/22 : USER ubuntu
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in c07f2356eab6
+Removing intermediate container c07f2356eab6
+ ---> 1b82d177da62
+Step 22/22 : CMD ["python3", "/usr/src/app/main.py"]
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
+ ---> Running in 3f3dc7911f9e
+Removing intermediate container 3f3dc7911f9e
+ ---> 67748bc4277c
+Successfully built 67748bc4277c
+Successfully tagged registry.messner.click/gunny26/docker-google-fotos-sync:2024-11-30-b5ed8c5
+The push refers to repository [registry.messner.click/gunny26/docker-google-fotos-sync]
+b019296d48f4: Preparing
+538f11cbcb6b: Preparing
+e2e99921ed5d: Preparing
+01e833d3a357: Preparing
+c24a818ff60c: Preparing
+e7e4809cdb49: Preparing
+4509bb27833b: Preparing
+5316191e4efc: Preparing
+503a377e914f: Preparing
+7472f2a62c40: Preparing
+447cb7d8fa86: Preparing
+8e907f479223: Preparing
+69b0ede615b0: Preparing
+462d8a01bcfc: Preparing
+42c7cd6b7242: Preparing
+899e3cff1bc1: Preparing
+2d6b6e63aa2f: Preparing
+e7e4809cdb49: Waiting
+4509bb27833b: Waiting
+5316191e4efc: Waiting
+503a377e914f: Waiting
+7472f2a62c40: Waiting
+447cb7d8fa86: Waiting
+8e907f479223: Waiting
+69b0ede615b0: Waiting
+462d8a01bcfc: Waiting
+42c7cd6b7242: Waiting
+899e3cff1bc1: Waiting
+2d6b6e63aa2f: Waiting
+b019296d48f4: Pushed
+01e833d3a357: Pushed
+c24a818ff60c: Pushed
+538f11cbcb6b: Pushed
+e2e99921ed5d: Pushed
+e7e4809cdb49: Pushed
+7472f2a62c40: Pushed
+5316191e4efc: Pushed
+4509bb27833b: Pushed
+462d8a01bcfc: Mounted from gunny26/docker-google-drive-sync
+447cb7d8fa86: Pushed
+8e907f479223: Pushed
+69b0ede615b0: Pushed
+42c7cd6b7242: Mounted from gunny26/docker-google-drive-sync
+899e3cff1bc1: Mounted from gunny26/docker-google-drive-sync
+2d6b6e63aa2f: Mounted from gunny26/docker-google-drive-sync
+503a377e914f: Pushed
+2024-11-30-b5ed8c5: digest: sha256:cc2bf21e865920996ac9c9356c26ebe213b666798d3816c2ad98a5bc0dc1d98b size: 3866
+The push refers to repository [registry.messner.click/gunny26/docker-google-fotos-sync]
+b019296d48f4: Preparing
+538f11cbcb6b: Preparing
+e2e99921ed5d: Preparing
+01e833d3a357: Preparing
+c24a818ff60c: Preparing
+e7e4809cdb49: Preparing
+4509bb27833b: Preparing
+5316191e4efc: Preparing
+503a377e914f: Preparing
+7472f2a62c40: Preparing
+447cb7d8fa86: Preparing
+8e907f479223: Preparing
+69b0ede615b0: Preparing
+462d8a01bcfc: Preparing
+42c7cd6b7242: Preparing
+899e3cff1bc1: Preparing
+2d6b6e63aa2f: Preparing
+447cb7d8fa86: Waiting
+8e907f479223: Waiting
+4509bb27833b: Waiting
+5316191e4efc: Waiting
+503a377e914f: Waiting
+7472f2a62c40: Waiting
+899e3cff1bc1: Waiting
+69b0ede615b0: Waiting
+e7e4809cdb49: Waiting
+462d8a01bcfc: Waiting
+2d6b6e63aa2f: Waiting
+42c7cd6b7242: Waiting
+b019296d48f4: Layer already exists
+01e833d3a357: Layer already exists
+e2e99921ed5d: Layer already exists
+c24a818ff60c: Layer already exists
+538f11cbcb6b: Layer already exists
+7472f2a62c40: Layer already exists
+4509bb27833b: Layer already exists
+503a377e914f: Layer already exists
+5316191e4efc: Layer already exists
+e7e4809cdb49: Layer already exists
+462d8a01bcfc: Layer already exists
+8e907f479223: Layer already exists
+42c7cd6b7242: Layer already exists
+69b0ede615b0: Layer already exists
+447cb7d8fa86: Layer already exists
+899e3cff1bc1: Layer already exists
+2d6b6e63aa2f: Layer already exists
+stable: digest: sha256:cc2bf21e865920996ac9c9356c26ebe213b666798d3816c2ad98a5bc0dc1d98b size: 3866

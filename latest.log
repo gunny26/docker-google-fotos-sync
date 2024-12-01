@@ -1,0 +1,79 @@
+docker-google-fotos-sync
+[latest 6ba9fe2] automatic pre latest image built commit
+ 2 files changed, 323 insertions(+), 1 deletion(-)
+ create mode 100644 stable.log
+ delete mode 100644 stable.tmp
+using 2024-11-30-d479f07
+Sending build context to Docker daemon    855kB
+Step 1/22 : FROM ubuntu:24.04
+24.04: Pulling from library/ubuntu
+Digest: sha256:278628f08d4979fb9af9ead44277dbc9c92c2465922310916ad0c46ec9999295
+Status: Downloaded newer image for ubuntu:24.04
+ ---> fec8bfd95b54
+Step 2/22 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 1696b2a27c5a
+Step 3/22 : ENV TZ=Europe/Vienna
+ ---> Using cache
+ ---> 3c8aeeaf96d2
+Step 4/22 : RUN apt update && apt -y --no-install-recommends upgrade
+ ---> Using cache
+ ---> f12659283c32
+Step 5/22 : RUN apt install --no-install-recommends -y     tzdata     python3-setuptools     python3-pip     python3-requests     python3-yaml     python3-boto3     python3-dateutil
+ ---> Using cache
+ ---> beec93876aa6
+Step 6/22 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> 4a73652f8104
+Step 7/22 : RUN mkdir /usr/src/app/data && chown -R ubuntu /usr/src/app
+ ---> Using cache
+ ---> 310165251c53
+Step 8/22 : COPY ./build/requirements.txt /usr/src/app/
+ ---> Using cache
+ ---> 07e279e9df45
+Step 9/22 : COPY ./build/webstorageS3-1.2.1-py3-none-any.whl /usr/src/app/
+ ---> Using cache
+ ---> 8ee9e02d45c2
+Step 10/22 : RUN pip3 install --break-system-packages --disable-pip-version-check --no-cache-dir ./webstorageS3-1.2.1-py3-none-any.whl
+ ---> Using cache
+ ---> 5142c772ba99
+Step 11/22 : RUN pip3 install --break-system-packages --disable-pip-version-check --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> 795335fb0c9d
+Step 12/22 : RUN pip3 freeze
+ ---> Using cache
+ ---> f8343fb8c244
+Step 13/22 : RUN apt -y purge python3-pip python3-setuptools;     apt -y autoremove;     apt -y clean; rm /usr/src/app/webstorageS3-1.2.1-py3-none-any.whl
+ ---> Using cache
+ ---> 15c513e168da
+Step 14/22 : RUN mkdir /home/ubuntu/.webstorage
+ ---> Using cache
+ ---> 72ead722faa4
+Step 15/22 : COPY ./secret/webstorage.yml /home/ubuntu/.webstorage/webstorage.yml
+ ---> Using cache
+ ---> d8be2434149d
+Step 16/22 : COPY ./secret/credentials.json /usr/src/app/credentials.json
+ ---> Using cache
+ ---> 0cc37e660e5f
+Step 17/22 : COPY ./secret/photoslibrary.pickle /usr/src/app/photoslibrary.pickle
+ ---> Using cache
+ ---> 730b79954138
+Step 18/22 : COPY ./build/tools.py /usr/src/app/tools.py
+ ---> Using cache
+ ---> 927ade6dee89
+Step 19/22 : COPY ./build/main.py /usr/src/app/main.py
+ ---> 62416d6ea06b
+Step 20/22 : RUN chown -R ubuntu /usr/src/app
+ ---> Running in 8739af2d1950
+Removing intermediate container 8739af2d1950
+ ---> a86b1fb79948
+Step 21/22 : USER ubuntu
+ ---> Running in b4bb6edb4280
+Removing intermediate container b4bb6edb4280
+ ---> 401f91ee1fc1
+Step 22/22 : CMD ["python3", "/usr/src/app/main.py"]
+ ---> Running in 041dca142beb
+Removing intermediate container 041dca142beb
+ ---> a226a67fd5ca
+Successfully built a226a67fd5ca
+Successfully tagged registry.messner.click/gunny26/docker-google-fotos-sync:2024-11-30-d479f07
