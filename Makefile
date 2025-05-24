@@ -36,7 +36,7 @@ stable:
 	git commit -a -m "automatic pre deployment commit" | tee -a stable.tmp
 	echo "using $(DATESTRING)-$(TAG)" | tee -a stable.tmp
 	# docker build --no-cache --platform $(PLATFORM) -t $(IMAGE_NAME) . | tee -a stable.tmp
-	docker build --platform $(PLATFORM_STABLE) -t $(IMAGE_NAME) . | tee -a stable.tmp
+	docker buildx build --platform $(PLATFORM_STABLE) -t $(IMAGE_NAME) . | tee -a stable.tmp
 	docker tag $(IMAGE_NAME) $(IMAGE_NAME_LATEST) | tee -a stable.tmp
 	docker tag $(IMAGE_NAME) $(IMAGE_NAME_STABLE) | tee -a stable.tmp
 	docker push $(IMAGE_NAME) | tee -a stable.tmp
