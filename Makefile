@@ -31,18 +31,11 @@ latest:
 	git commit -a -m "automatic post latest image built"
 
 stable:
-	echo $(IMAGE_NAME) > stable.tmp
-	git add * | tee -a stable.tmp
-	git commit -a -m "automatic pre deployment commit" | tee -a stable.tmp
-	echo "using $(DATESTRING)-$(TAG)" | tee -a stable.tmp
-	# docker build --no-cache --platform $(PLATFORM) -t $(IMAGE_NAME) . | tee -a stable.tmp
-	docker buildx build --platform $(PLATFORM_STABLE),$(PLATFORM_LATEST) --push -t $(IMAGE_NAME) . | tee -a stable.tmp
-	docker tag $(IMAGE_NAME) $(IMAGE_NAME_LATEST) | tee -a stable.tmp
-	docker tag $(IMAGE_NAME) $(IMAGE_NAME_STABLE) | tee -a stable.tmp
-	docker push $(IMAGE_NAME) | tee -a stable.tmp
-	docker push $(IMAGE_NAME_STABLE) | tee -a stable.tmp
-	mv stable.tmp stable.log
-	git add stable.log
+	echo $(IMAGE_NAME)
+	git commit -a -m "automatic pre deployment commit"
+	echo "using $(DATESTRING)-$(TAG)"
+	# docker build --no-cache --platform $(PLATFORM) -t $(IMAGE_NAME) .
+	docker buildx build --platform $(PLATFORM_STABLE),$(PLATFORM_LATEST) --push -t $(IMAGE_NAME),$(IMAGE_NAME_STABLE) .
 	git push origin main
 
 lint:
