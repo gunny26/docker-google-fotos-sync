@@ -1,10 +1,4 @@
-ghcr.io/gunny26/docker-google-fotos-sync:2025-05-24-cd6f378
-Auf Branch latest
-Unversionierte Dateien:
-  (benutzen Sie "git add <Datei>...", um die Änderungen zum Commit vorzumerken)
-	.flake8
-	latest.tmp
-
-nichts zum Commit vorgemerkt, aber es gibt unversionierte Dateien
-(benutzen Sie "git add" zum Versionieren)
-using 2025-05-24-cd6f378
+ghcr.io/gunny26/docker-google-fotos-sync:2025-05-24-4fc34ab
+[latest 1011711] automatic pre latest image built commit
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+using 2025-05-24-4fc34ab
