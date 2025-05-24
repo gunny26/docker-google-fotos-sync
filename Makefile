@@ -24,7 +24,7 @@ latest:
 	echo $(IMAGE_NAME) > latest.tmp
 	git commit -a -m "automatic pre latest image built commit" | tee -a latest.tmp
 	echo "using $(DATESTRING)-$(TAG)" | tee -a latest.tmp
-	docker build --platform $(PLATFORM_LATEST) -t $(IMAGE_NAME) . | tee -a latest.tmp
+	docker buildx build --platform $(PLATFORM_LATEST) -t $(IMAGE_NAME) . | tee -a latest.tmp
 	docker tag $(IMAGE_NAME) $(IMAGE_NAME_LATEST) | tee -a latest.tmp
 	mv latest.tmp latest.log
 	git add latest.log

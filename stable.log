@@ -1,153 +1,420 @@
-docker-google-fotos-sync
-[master d479f07] automatic pre deployment commit
- 2 files changed, 45 insertions(+), 25 deletions(-)
+ghcr.io/gunny26/docker-google-fotos-sync:2025-05-24-3f7c750
+[latest 75cf568] automatic pre deployment commit
+ 1 file changed, 1 insertion(+)
  create mode 100644 stable.tmp
-using 2024-11-30-b5ed8c5
-Sending build context to Docker daemon  820.7kB
+using 2025-05-24-3f7c750
+Sending build context to Docker daemon  281.6kB
 Step 1/22 : FROM ubuntu:24.04
 24.04: Pulling from library/ubuntu
-Digest: sha256:278628f08d4979fb9af9ead44277dbc9c92c2465922310916ad0c46ec9999295
+2f074dc76c5d: Pulling fs layer
+2f074dc76c5d: Verifying Checksum
+2f074dc76c5d: Download complete
+2f074dc76c5d: Pull complete
+Digest: sha256:6015f66923d7afbc53558d7ccffd325d43b4e249f41a6e93eef074c9505d2233
 Status: Downloaded newer image for ubuntu:24.04
- ---> 2d4e6732b03f
+ ---> 57c587f9225f
 Step 2/22 : ENV DEBIAN_FRONTEND=noninteractive
- ---> Using cache
- ---> 4597c87c264d
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 3c932a491b45
+ ---> Removed intermediate container 3c932a491b45
+ ---> 0d90b8b8abd9
 Step 3/22 : ENV TZ=Europe/Vienna
- ---> Using cache
- ---> 5bf920f9131a
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in eb73d47dd2a8
+ ---> Removed intermediate container eb73d47dd2a8
+ ---> 66da5de91c57
 Step 4/22 : RUN apt update && apt -y --no-install-recommends upgrade
- ---> Using cache
- ---> 3d9bdcfc07ad
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 124a224c7de6
+[91m
+[0m[91mWARNING: [0m[91mapt[0m[91m does not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
+[0m[91m
+[0mGet:1 http://ports.ubuntu.com/ubuntu-ports noble InRelease [256 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease [126 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease [126 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports noble/multiverse arm64 Packages [274 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports noble/restricted arm64 Packages [113 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports noble/universe arm64 Packages [19.0 MB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 Packages [1776 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/multiverse arm64 Packages [21.1 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe arm64 Packages [1345 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted arm64 Packages [1780 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 Packages [1412 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports noble-backports/universe arm64 Packages [31.8 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages [48.0 kB]
+Get:15 http://ports.ubuntu.com/ubuntu-ports noble-security/multiverse arm64 Packages [19.3 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports noble-security/universe arm64 Packages [1051 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports noble-security/main arm64 Packages [1093 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted arm64 Packages [1730 kB]
+Fetched 30.4 MB in 28s (1084 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+All packages are up to date.
+[91m
+[0m[91mWARNING: [0m[91mapt does not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
+
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ ---> Removed intermediate container 124a224c7de6
+ ---> 3941de9984ae
 Step 5/22 : RUN apt install --no-install-recommends -y     tzdata     python3-setuptools     python3-pip     python3-requests     python3-yaml     python3-boto3     python3-dateutil
- ---> Using cache
- ---> de967061d3b7
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in e9ea0d1df36c
+[91m
+[0m[91mWARNING: [0m[91mapt does not have a stable CLI interface. [0m[91mUse with caution in scripts.
+[0m[91m
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  ca-certificates libexpat1 libpython3-stdlib libpython3.12-minimal
+  libpython3.12-stdlib libreadline8t64 libsqlite3-0 libyaml-0-2 media-types
+  netbase openssl python3 python3-botocore python3-certifi python3-chardet
+  python3-idna python3-jmespath python3-minimal python3-pkg-resources
+  python3-s3transfer python3-six python3-urllib3 python3-wheel python3.12
+  python3.12-minimal readline-common
+Suggested packages:
+  python3-doc python3-tk python3-venv python3-cryptography python3-openssl
+  python3-socks python-requests-doc python-setuptools-doc python3-brotli
+  python3.12-venv python3.12-doc binutils binfmt-support readline-doc
+Recommended packages:
+  build-essential python3-dev
+The following NEW packages will be installed:
+  ca-certificates libexpat1 libpython3-stdlib libpython3.12-minimal
+  libpython3.12-stdlib libreadline8t64 libsqlite3-0 libyaml-0-2 media-types
+  netbase openssl python3 python3-boto3 python3-botocore python3-certifi
+  python3-chardet python3-dateutil python3-idna python3-jmespath
+  python3-minimal python3-pip python3-pkg-resources python3-requests
+  python3-s3transfer python3-setuptools python3-six python3-urllib3
+  python3-wheel python3-yaml python3.12 python3.12-minimal readline-common
+  tzdata
+0 upgraded, 33 newly installed, 0 to remove and 0 not upgraded.
+Need to get 17.3 MB of archives.
+After this operation, 141 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libpython3.12-minimal arm64 3.12.3-1ubuntu0.5 [831 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libexpat1 arm64 2.6.1-2ubuntu0.3 [77.4 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3.12-minimal arm64 3.12.3-1ubuntu0.5 [2254 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3-minimal arm64 3.12.3-0ubuntu2 [27.4 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 media-types all 10.1.0 [27.5 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 netbase all 6.4 [13.1 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 tzdata all 2025b-0ubuntu0.24.04 [276 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 readline-common all 8.2-4build1 [56.5 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libreadline8t64 arm64 8.2-4build1 [153 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsqlite3-0 arm64 3.45.1-1ubuntu2.3 [703 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libpython3.12-stdlib arm64 3.12.3-1ubuntu0.5 [2037 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3.12 arm64 3.12.3-1ubuntu0.5 [651 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libpython3-stdlib arm64 3.12.3-0ubuntu2 [10.0 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3 arm64 3.12.3-0ubuntu2 [23.0 kB]
+Get:15 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 openssl arm64 3.0.13-0ubuntu3.5 [984 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 ca-certificates all 20240203 [159 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libyaml-0-2 arm64 0.2.5-1build1 [51.5 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3-pkg-resources all 68.1.2-2ubuntu1.1 [168 kB]
+Get:19 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-yaml arm64 6.0.1-2build2 [113 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-six all 1.16.0-4 [12.4 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-dateutil all 2.8.2-3ubuntu1 [79.4 kB]
+Get:22 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-jmespath all 1.0.1-1 [21.3 kB]
+Get:23 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3-urllib3 all 2.0.7-1ubuntu0.1 [93.1 kB]
+Get:24 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-certifi all 2023.11.17-1 [165 kB]
+Get:25 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-chardet all 5.2.0+dfsg-1 [117 kB]
+Get:26 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3-idna all 3.6-2ubuntu0.1 [49.0 kB]
+Get:27 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-requests all 2.31.0+dfsg-1ubuntu1 [50.7 kB]
+Get:28 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-botocore all 1.34.46+repack-1ubuntu1 [6211 kB]
+Get:29 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-s3transfer all 0.10.1-1ubuntu2 [54.3 kB]
+Get:30 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 python3-boto3 all 1.34.46+dfsg-1ubuntu1 [72.5 kB]
+Get:31 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3-setuptools all 68.1.2-2ubuntu1.1 [396 kB]
+Get:32 http://ports.ubuntu.com/ubuntu-ports noble/universe arm64 python3-wheel all 0.42.0-2 [53.1 kB]
+Get:33 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe arm64 python3-pip all 24.0+dfsg-1ubuntu1.1 [1317 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 17.3 MB in 5s (3194 kB/s)
+Selecting previously unselected package libpython3.12-minimal:arm64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4376 files and directories currently installed.)
+Preparing to unpack .../libpython3.12-minimal_3.12.3-1ubuntu0.5_arm64.deb ...
+Unpacking libpython3.12-minimal:arm64 (3.12.3-1ubuntu0.5) ...
+Selecting previously unselected package libexpat1:arm64.
+Preparing to unpack .../libexpat1_2.6.1-2ubuntu0.3_arm64.deb ...
+Unpacking libexpat1:arm64 (2.6.1-2ubuntu0.3) ...
+Selecting previously unselected package python3.12-minimal.
+Preparing to unpack .../python3.12-minimal_3.12.3-1ubuntu0.5_arm64.deb ...
+Unpacking python3.12-minimal (3.12.3-1ubuntu0.5) ...
+Setting up libpython3.12-minimal:arm64 (3.12.3-1ubuntu0.5) ...
+Setting up libexpat1:arm64 (2.6.1-2ubuntu0.3) ...
+Setting up python3.12-minimal (3.12.3-1ubuntu0.5) ...
+Selecting previously unselected package python3-minimal.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4695 files and directories currently installed.)
+Preparing to unpack .../0-python3-minimal_3.12.3-0ubuntu2_arm64.deb ...
+Unpacking python3-minimal (3.12.3-0ubuntu2) ...
+Selecting previously unselected package media-types.
+Preparing to unpack .../1-media-types_10.1.0_all.deb ...
+Unpacking media-types (10.1.0) ...
+Selecting previously unselected package netbase.
+Preparing to unpack .../2-netbase_6.4_all.deb ...
+Unpacking netbase (6.4) ...
+Selecting previously unselected package tzdata.
+Preparing to unpack .../3-tzdata_2025b-0ubuntu0.24.04_all.deb ...
+Unpacking tzdata (2025b-0ubuntu0.24.04) ...
+Selecting previously unselected package readline-common.
+Preparing to unpack .../4-readline-common_8.2-4build1_all.deb ...
+Unpacking readline-common (8.2-4build1) ...
+Selecting previously unselected package libreadline8t64:arm64.
+Preparing to unpack .../5-libreadline8t64_8.2-4build1_arm64.deb ...
+Adding 'diversion of /lib/aarch64-linux-gnu/libhistory.so.8 to /lib/aarch64-linux-gnu/libhistory.so.8.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/aarch64-linux-gnu/libhistory.so.8.2 to /lib/aarch64-linux-gnu/libhistory.so.8.2.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/aarch64-linux-gnu/libreadline.so.8 to /lib/aarch64-linux-gnu/libreadline.so.8.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/aarch64-linux-gnu/libreadline.so.8.2 to /lib/aarch64-linux-gnu/libreadline.so.8.2.usr-is-merged by libreadline8t64'
+Unpacking libreadline8t64:arm64 (8.2-4build1) ...
+Selecting previously unselected package libsqlite3-0:arm64.
+Preparing to unpack .../6-libsqlite3-0_3.45.1-1ubuntu2.3_arm64.deb ...
+Unpacking libsqlite3-0:arm64 (3.45.1-1ubuntu2.3) ...
+Selecting previously unselected package libpython3.12-stdlib:arm64.
+Preparing to unpack .../7-libpython3.12-stdlib_3.12.3-1ubuntu0.5_arm64.deb ...
+Unpacking libpython3.12-stdlib:arm64 (3.12.3-1ubuntu0.5) ...
+Selecting previously unselected package python3.12.
+Preparing to unpack .../8-python3.12_3.12.3-1ubuntu0.5_arm64.deb ...
+Unpacking python3.12 (3.12.3-1ubuntu0.5) ...
+Selecting previously unselected package libpython3-stdlib:arm64.
+Preparing to unpack .../9-libpython3-stdlib_3.12.3-0ubuntu2_arm64.deb ...
+Unpacking libpython3-stdlib:arm64 (3.12.3-0ubuntu2) ...
+Setting up python3-minimal (3.12.3-0ubuntu2) ...
+Selecting previously unselected package python3.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5701 files and directories currently installed.)
+Preparing to unpack .../00-python3_3.12.3-0ubuntu2_arm64.deb ...
+Unpacking python3 (3.12.3-0ubuntu2) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../01-openssl_3.0.13-0ubuntu3.5_arm64.deb ...
+Unpacking openssl (3.0.13-0ubuntu3.5) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../02-ca-certificates_20240203_all.deb ...
+Unpacking ca-certificates (20240203) ...
+Selecting previously unselected package libyaml-0-2:arm64.
+Preparing to unpack .../03-libyaml-0-2_0.2.5-1build1_arm64.deb ...
+Unpacking libyaml-0-2:arm64 (0.2.5-1build1) ...
+Selecting previously unselected package python3-pkg-resources.
+Preparing to unpack .../04-python3-pkg-resources_68.1.2-2ubuntu1.1_all.deb ...
+Unpacking python3-pkg-resources (68.1.2-2ubuntu1.1) ...
+Selecting previously unselected package python3-yaml.
+Preparing to unpack .../05-python3-yaml_6.0.1-2build2_arm64.deb ...
+Unpacking python3-yaml (6.0.1-2build2) ...
+Selecting previously unselected package python3-six.
+Preparing to unpack .../06-python3-six_1.16.0-4_all.deb ...
+Unpacking python3-six (1.16.0-4) ...
+Selecting previously unselected package python3-dateutil.
+Preparing to unpack .../07-python3-dateutil_2.8.2-3ubuntu1_all.deb ...
+Unpacking python3-dateutil (2.8.2-3ubuntu1) ...
+Selecting previously unselected package python3-jmespath.
+Preparing to unpack .../08-python3-jmespath_1.0.1-1_all.deb ...
+Unpacking python3-jmespath (1.0.1-1) ...
+Selecting previously unselected package python3-urllib3.
+Preparing to unpack .../09-python3-urllib3_2.0.7-1ubuntu0.1_all.deb ...
+Unpacking python3-urllib3 (2.0.7-1ubuntu0.1) ...
+Selecting previously unselected package python3-certifi.
+Preparing to unpack .../10-python3-certifi_2023.11.17-1_all.deb ...
+Unpacking python3-certifi (2023.11.17-1) ...
+Selecting previously unselected package python3-chardet.
+Preparing to unpack .../11-python3-chardet_5.2.0+dfsg-1_all.deb ...
+Unpacking python3-chardet (5.2.0+dfsg-1) ...
+Selecting previously unselected package python3-idna.
+Preparing to unpack .../12-python3-idna_3.6-2ubuntu0.1_all.deb ...
+Unpacking python3-idna (3.6-2ubuntu0.1) ...
+Selecting previously unselected package python3-requests.
+Preparing to unpack .../13-python3-requests_2.31.0+dfsg-1ubuntu1_all.deb ...
+Unpacking python3-requests (2.31.0+dfsg-1ubuntu1) ...
+Selecting previously unselected package python3-botocore.
+Preparing to unpack .../14-python3-botocore_1.34.46+repack-1ubuntu1_all.deb ...
+Unpacking python3-botocore (1.34.46+repack-1ubuntu1) ...
+Selecting previously unselected package python3-s3transfer.
+Preparing to unpack .../15-python3-s3transfer_0.10.1-1ubuntu2_all.deb ...
+Unpacking python3-s3transfer (0.10.1-1ubuntu2) ...
+Selecting previously unselected package python3-boto3.
+Preparing to unpack .../16-python3-boto3_1.34.46+dfsg-1ubuntu1_all.deb ...
+Unpacking python3-boto3 (1.34.46+dfsg-1ubuntu1) ...
+Selecting previously unselected package python3-setuptools.
+Preparing to unpack .../17-python3-setuptools_68.1.2-2ubuntu1.1_all.deb ...
+Unpacking python3-setuptools (68.1.2-2ubuntu1.1) ...
+Selecting previously unselected package python3-wheel.
+Preparing to unpack .../18-python3-wheel_0.42.0-2_all.deb ...
+Unpacking python3-wheel (0.42.0-2) ...
+Selecting previously unselected package python3-pip.
+Preparing to unpack .../19-python3-pip_24.0+dfsg-1ubuntu1.1_all.deb ...
+Unpacking python3-pip (24.0+dfsg-1ubuntu1.1) ...
+Setting up media-types (10.1.0) ...
+Setting up libyaml-0-2:arm64 (0.2.5-1build1) ...
+Setting up libsqlite3-0:arm64 (3.45.1-1ubuntu2.3) ...
+Setting up tzdata (2025b-0ubuntu0.24.04) ...
+
+Current default time zone: 'Etc/UTC'
+Local time is now:      Sat May 24 08:56:05 UTC 2025.
+Universal Time is now:  Sat May 24 08:56:05 UTC 2025.
+Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+Setting up netbase (6.4) ...
+Setting up openssl (3.0.13-0ubuntu3.5) ...
+Setting up readline-common (8.2-4build1) ...
+Setting up ca-certificates (20240203) ...
+Updating certificates in /etc/ssl/certs...
+146 added, 0 removed; done.
+Setting up libreadline8t64:arm64 (8.2-4build1) ...
+Setting up libpython3.12-stdlib:arm64 (3.12.3-1ubuntu0.5) ...
+Setting up python3.12 (3.12.3-1ubuntu0.5) ...
+Setting up libpython3-stdlib:arm64 (3.12.3-0ubuntu2) ...
+Setting up python3 (3.12.3-0ubuntu2) ...
+Setting up python3-wheel (0.42.0-2) ...
+Setting up python3-six (1.16.0-4) ...
+Setting up python3-certifi (2023.11.17-1) ...
+Setting up python3-jmespath (1.0.1-1) ...
+Setting up python3-idna (3.6-2ubuntu0.1) ...
+Setting up python3-urllib3 (2.0.7-1ubuntu0.1) ...
+Setting up python3-dateutil (2.8.2-3ubuntu1) ...
+Setting up python3-pkg-resources (68.1.2-2ubuntu1.1) ...
+Setting up python3-setuptools (68.1.2-2ubuntu1.1) ...
+Setting up python3-yaml (6.0.1-2build2) ...
+Setting up python3-chardet (5.2.0+dfsg-1) ...
+Setting up python3-requests (2.31.0+dfsg-1ubuntu1) ...
+Setting up python3-pip (24.0+dfsg-1ubuntu1.1) ...
+Setting up python3-botocore (1.34.46+repack-1ubuntu1) ...
+Setting up python3-s3transfer (0.10.1-1ubuntu2) ...
+Setting up python3-boto3 (1.34.46+dfsg-1ubuntu1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.4) ...
+Processing triggers for ca-certificates (20240203) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+ ---> Removed intermediate container e9ea0d1df36c
+ ---> 88bd7d4fbce6
 Step 6/22 : WORKDIR /usr/src/app
- ---> Using cache
- ---> bc73510cd778
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in a01525ad2b61
+ ---> Removed intermediate container a01525ad2b61
+ ---> 8022a858a4be
 Step 7/22 : RUN mkdir /usr/src/app/data && chown -R ubuntu /usr/src/app
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in 910827bbcb0b
-Removing intermediate container 910827bbcb0b
- ---> de1952c9f417
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 7fc7516c7f6f
+ ---> Removed intermediate container 7fc7516c7f6f
+ ---> 7b9cc668c83a
 Step 8/22 : COPY ./build/requirements.txt /usr/src/app/
- ---> 54de0d5d5624
+ ---> 68e59af7f1cd
 Step 9/22 : COPY ./build/webstorageS3-1.2.1-py3-none-any.whl /usr/src/app/
- ---> 7531e7076062
+ ---> 8a06059a00a6
 Step 10/22 : RUN pip3 install --break-system-packages --disable-pip-version-check --no-cache-dir ./webstorageS3-1.2.1-py3-none-any.whl
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in fc4cd26d3e56
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in daf361343149
 Processing ./webstorageS3-1.2.1-py3-none-any.whl
 Installing collected packages: webstorageS3
 Successfully installed webstorageS3-1.2.1
 [91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
-[0mRemoving intermediate container fc4cd26d3e56
- ---> 75fa1e4d94f9
+[0m ---> Removed intermediate container daf361343149
+ ---> 6516db3f59f2
 Step 11/22 : RUN pip3 install --break-system-packages --disable-pip-version-check --no-cache-dir -r requirements.txt
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in 8b45992d1535
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in b3be3ccd21bf
 Requirement already satisfied: boto3 in /usr/lib/python3/dist-packages (from -r requirements.txt (line 1)) (1.34.46)
 Collecting google-api-python-client (from -r requirements.txt (line 2))
-  Downloading google_api_python_client-2.154.0-py2.py3-none-any.whl.metadata (6.7 kB)
+  Downloading google_api_python_client-2.170.0-py3-none-any.whl.metadata (6.7 kB)
 Collecting google_auth_oauthlib (from -r requirements.txt (line 3))
-  Downloading google_auth_oauthlib-1.2.1-py2.py3-none-any.whl.metadata (2.7 kB)
+  Downloading google_auth_oauthlib-1.2.2-py3-none-any.whl.metadata (2.7 kB)
 Collecting prometheus_client (from -r requirements.txt (line 4))
-  Downloading prometheus_client-0.21.0-py3-none-any.whl.metadata (1.8 kB)
+  Downloading prometheus_client-0.22.0-py3-none-any.whl.metadata (14 kB)
 Requirement already satisfied: webstorageS3>=1.0.0 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 5)) (1.2.1)
-Collecting httplib2<1.dev0,>=0.19.0 (from google-api-python-client->-r requirements.txt (line 2))
+Collecting httplib2<1.0.0,>=0.19.0 (from google-api-python-client->-r requirements.txt (line 2))
   Downloading httplib2-0.22.0-py3-none-any.whl.metadata (2.6 kB)
-Collecting google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0 (from google-api-python-client->-r requirements.txt (line 2))
-  Downloading google_auth-2.36.0-py2.py3-none-any.whl.metadata (4.7 kB)
+Collecting google-auth!=2.24.0,!=2.25.0,<3.0.0,>=1.32.0 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading google_auth-2.40.2-py2.py3-none-any.whl.metadata (6.2 kB)
 Collecting google-auth-httplib2<1.0.0,>=0.2.0 (from google-api-python-client->-r requirements.txt (line 2))
   Downloading google_auth_httplib2-0.2.0-py2.py3-none-any.whl.metadata (2.2 kB)
-Collecting google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5 (from google-api-python-client->-r requirements.txt (line 2))
-  Downloading google_api_core-2.23.0-py3-none-any.whl.metadata (3.0 kB)
+Collecting google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5 (from google-api-python-client->-r requirements.txt (line 2))
+  Downloading google_api_core-2.24.2-py3-none-any.whl.metadata (3.0 kB)
 Collecting uritemplate<5,>=3.0.1 (from google-api-python-client->-r requirements.txt (line 2))
   Downloading uritemplate-4.1.1-py2.py3-none-any.whl.metadata (2.9 kB)
 Collecting requests-oauthlib>=0.7.0 (from google_auth_oauthlib->-r requirements.txt (line 3))
   Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl.metadata (11 kB)
-Collecting googleapis-common-protos<2.0.dev0,>=1.56.2 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
-  Downloading googleapis_common_protos-1.66.0-py2.py3-none-any.whl.metadata (1.5 kB)
-Collecting protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<6.0.0.dev0,>=3.19.5 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
-  Downloading protobuf-5.29.0-cp38-abi3-manylinux2014_aarch64.whl.metadata (592 bytes)
-Collecting proto-plus<2.0.0dev,>=1.22.3 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
-  Downloading proto_plus-1.25.0-py3-none-any.whl.metadata (2.2 kB)
-Requirement already satisfied: requests<3.0.0.dev0,>=2.18.0 in /usr/lib/python3/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0.dev0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2)) (2.31.0)
-Collecting cachetools<6.0,>=2.0.0 (from google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
-  Downloading cachetools-5.5.0-py3-none-any.whl.metadata (5.3 kB)
-Collecting pyasn1-modules>=0.2.1 (from google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
-  Downloading pyasn1_modules-0.4.1-py3-none-any.whl.metadata (3.5 kB)
-Collecting rsa<5,>=3.1.4 (from google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
-  Downloading rsa-4.9-py3-none-any.whl.metadata (4.2 kB)
-Collecting pyparsing!=3.0.0,!=3.0.1,!=3.0.2,!=3.0.3,<4,>=2.4.2 (from httplib2<1.dev0,>=0.19.0->google-api-python-client->-r requirements.txt (line 2))
-  Downloading pyparsing-3.2.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
+  Downloading googleapis_common_protos-1.70.0-py3-none-any.whl.metadata (9.3 kB)
+Collecting protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<7.0.0,>=3.19.5 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
+  Downloading protobuf-6.31.0-cp39-abi3-manylinux2014_aarch64.whl.metadata (593 bytes)
+Collecting proto-plus<2.0.0,>=1.22.3 (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2))
+  Downloading proto_plus-1.26.1-py3-none-any.whl.metadata (2.2 kB)
+Requirement already satisfied: requests<3.0.0,>=2.18.0 in /usr/lib/python3/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client->-r requirements.txt (line 2)) (2.31.0)
+Collecting cachetools<6.0,>=2.0.0 (from google-auth!=2.24.0,!=2.25.0,<3.0.0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading cachetools-5.5.2-py3-none-any.whl.metadata (5.4 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth!=2.24.0,!=2.25.0,<3.0.0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting rsa<5,>=3.1.4 (from google-auth!=2.24.0,!=2.25.0,<3.0.0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting pyparsing!=3.0.0,!=3.0.1,!=3.0.2,!=3.0.3,<4,>=2.4.2 (from httplib2<1.0.0,>=0.19.0->google-api-python-client->-r requirements.txt (line 2))
+  Downloading pyparsing-3.2.3-py3-none-any.whl.metadata (5.0 kB)
 Collecting oauthlib>=3.0.0 (from requests-oauthlib>=0.7.0->google_auth_oauthlib->-r requirements.txt (line 3))
   Downloading oauthlib-3.2.2-py3-none-any.whl.metadata (7.5 kB)
-Collecting pyasn1<0.7.0,>=0.4.6 (from pyasn1-modules>=0.2.1->google-auth!=2.24.0,!=2.25.0,<3.0.0.dev0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
+Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth!=2.24.0,!=2.25.0,<3.0.0,>=1.32.0->google-api-python-client->-r requirements.txt (line 2))
   Downloading pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
-Downloading google_api_python_client-2.154.0-py2.py3-none-any.whl (12.6 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 1.1 MB/s eta 0:00:00
-Downloading google_auth_oauthlib-1.2.1-py2.py3-none-any.whl (24 kB)
-Downloading prometheus_client-0.21.0-py3-none-any.whl (54 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.7/54.7 kB 2.2 MB/s eta 0:00:00
-Downloading google_api_core-2.23.0-py3-none-any.whl (156 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 156.6/156.6 kB 1.6 MB/s eta 0:00:00
-Downloading google_auth-2.36.0-py2.py3-none-any.whl (209 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 209.5/209.5 kB 1.4 MB/s eta 0:00:00
+Downloading google_api_python_client-2.170.0-py3-none-any.whl (13.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.5/13.5 MB 1.2 MB/s eta 0:00:00
+Downloading google_auth_oauthlib-1.2.2-py3-none-any.whl (19 kB)
+Downloading prometheus_client-0.22.0-py3-none-any.whl (62 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.7/62.7 kB 2.6 MB/s eta 0:00:00
+Downloading google_api_core-2.24.2-py3-none-any.whl (160 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 160.1/160.1 kB 2.0 MB/s eta 0:00:00
+Downloading google_auth-2.40.2-py2.py3-none-any.whl (216 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.1/216.1 kB 1.7 MB/s eta 0:00:00
 Downloading google_auth_httplib2-0.2.0-py2.py3-none-any.whl (9.3 kB)
 Downloading httplib2-0.22.0-py3-none-any.whl (96 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.9/96.9 kB 1.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.9/96.9 kB 2.0 MB/s eta 0:00:00
 Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
 Downloading uritemplate-4.1.1-py2.py3-none-any.whl (10 kB)
-Downloading cachetools-5.5.0-py3-none-any.whl (9.5 kB)
-Downloading googleapis_common_protos-1.66.0-py2.py3-none-any.whl (221 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 221.7/221.7 kB 1.4 MB/s eta 0:00:00
+Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)
+Downloading googleapis_common_protos-1.70.0-py3-none-any.whl (294 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.5/294.5 kB 1.9 MB/s eta 0:00:00
 Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.7/151.7 kB 1.6 MB/s eta 0:00:00
-Downloading proto_plus-1.25.0-py3-none-any.whl (50 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 kB 2.2 MB/s eta 0:00:00
-Downloading protobuf-5.29.0-cp38-abi3-manylinux2014_aarch64.whl (319 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 319.6/319.6 kB 1.3 MB/s eta 0:00:00
-Downloading pyasn1_modules-0.4.1-py3-none-any.whl (181 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.5/181.5 kB 1.7 MB/s eta 0:00:00
-Downloading pyparsing-3.2.0-py3-none-any.whl (106 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 1.5 MB/s eta 0:00:00
-Downloading rsa-4.9-py3-none-any.whl (34 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.7/151.7 kB 1.9 MB/s eta 0:00:00
+Downloading proto_plus-1.26.1-py3-none-any.whl (50 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.2/50.2 kB 2.6 MB/s eta 0:00:00
+Downloading protobuf-6.31.0-cp39-abi3-manylinux2014_aarch64.whl (321 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 321.9/321.9 kB 1.8 MB/s eta 0:00:00
+Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.3/181.3 kB 2.1 MB/s eta 0:00:00
+Downloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.1/111.1 kB 1.7 MB/s eta 0:00:00
+Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
 Downloading pyasn1-0.6.1-py3-none-any.whl (83 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.1/83.1 kB 2.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.1/83.1 kB 2.6 MB/s eta 0:00:00
 Installing collected packages: uritemplate, pyparsing, pyasn1, protobuf, prometheus_client, oauthlib, cachetools, rsa, requests-oauthlib, pyasn1-modules, proto-plus, httplib2, googleapis-common-protos, google-auth, google_auth_oauthlib, google-auth-httplib2, google-api-core, google-api-python-client
-Successfully installed cachetools-5.5.0 google-api-core-2.23.0 google-api-python-client-2.154.0 google-auth-2.36.0 google-auth-httplib2-0.2.0 google_auth_oauthlib-1.2.1 googleapis-common-protos-1.66.0 httplib2-0.22.0 oauthlib-3.2.2 prometheus_client-0.21.0 proto-plus-1.25.0 protobuf-5.29.0 pyasn1-0.6.1 pyasn1-modules-0.4.1 pyparsing-3.2.0 requests-oauthlib-2.0.0 rsa-4.9 uritemplate-4.1.1
+Successfully installed cachetools-5.5.2 google-api-core-2.24.2 google-api-python-client-2.170.0 google-auth-2.40.2 google-auth-httplib2-0.2.0 google_auth_oauthlib-1.2.2 googleapis-common-protos-1.70.0 httplib2-0.22.0 oauthlib-3.2.2 prometheus_client-0.22.0 proto-plus-1.26.1 protobuf-6.31.0 pyasn1-0.6.1 pyasn1-modules-0.4.2 pyparsing-3.2.3 requests-oauthlib-2.0.0 rsa-4.9.1 uritemplate-4.1.1
 [91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
-[0mRemoving intermediate container 8b45992d1535
- ---> c94530e3c8ca
+[0m ---> Removed intermediate container b3be3ccd21bf
+ ---> c66d0cfb06b2
 Step 12/22 : RUN pip3 freeze
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in 2db34e97e243
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 00ff1048fd83
 boto3==1.34.46
 botocore==1.34.46
-cachetools==5.5.0
+cachetools==5.5.2
 certifi==2023.11.17
 chardet==5.2.0
-google-api-core==2.23.0
-google-api-python-client==2.154.0
-google-auth==2.36.0
+google-api-core==2.24.2
+google-api-python-client==2.170.0
+google-auth==2.40.2
 google-auth-httplib2==0.2.0
-google-auth-oauthlib==1.2.1
-googleapis-common-protos==1.66.0
+google-auth-oauthlib==1.2.2
+googleapis-common-protos==1.70.0
 httplib2==0.22.0
 idna==3.6
 jmespath==1.0.1
 oauthlib==3.2.2
-prometheus_client==0.21.0
-proto-plus==1.25.0
-protobuf==5.29.0
+prometheus_client==0.22.0
+proto-plus==1.26.1
+protobuf==6.31.0
 pyasn1==0.6.1
-pyasn1_modules==0.4.1
-pyparsing==3.2.0
+pyasn1_modules==0.4.2
+pyparsing==3.2.3
 python-dateutil==2.8.2
 PyYAML==6.0.1
 requests==2.31.0
 requests-oauthlib==2.0.0
-rsa==4.9
+rsa==4.9.1
 s3transfer==0.10.1
 setuptools==68.1.2
 six==1.16.0
@@ -155,11 +422,11 @@ uritemplate==4.1.1
 urllib3==2.0.7
 webstorageS3 @ file:///usr/src/app/webstorageS3-1.2.1-py3-none-any.whl#sha256=315dbd7f087845f1849185b8afd5f5710fedb7c4ce2fa65052ab448d597cc38f
 wheel==0.42.0
-Removing intermediate container 2db34e97e243
- ---> 3b9e1ddcd478
+ ---> Removed intermediate container 00ff1048fd83
+ ---> 0a1281d985f3
 Step 13/22 : RUN apt -y purge python3-pip python3-setuptools;     apt -y autoremove;     apt -y clean; rm /usr/src/app/webstorageS3-1.2.1-py3-none-any.whl
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in 556b5e523c08
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in a0973f1223a3
 [91m
 [0m[91mWARNING: [0m[91mapt [0m[91mdoes not have a stable CLI interface. Use with caution in scripts.[0m[91m
 [0m[91m
@@ -173,12 +440,12 @@ The following packages will be REMOVED:
   python3-pip* python3-setuptools*
 0 upgraded, 0 newly installed, 2 to remove and 0 not upgraded.
 After this operation, 9275 kB disk space will be freed.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 10116 files and directories currently installed.)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 10119 files and directories currently installed.)
 Removing python3-pip (24.0+dfsg-1ubuntu1.1) ...
 Removing python3-setuptools (68.1.2-2ubuntu1.1) ...
 [91m
-[0m[91mWARNING: [0m[91mapt [0m[91mdoes not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
-[0m[91m
+[0m[91mWARNING: [0m[91mapt [0m[91mdoes not have a stable CLI interface. Use with caution in scripts.[0m[91m
+
 [0mReading package lists...
 Building dependency tree...
 Reading state information...
@@ -186,138 +453,138 @@ The following packages will be REMOVED:
   python3-wheel
 0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
 After this operation, 244 kB disk space will be freed.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 9230 files and directories currently installed.)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 9233 files and directories currently installed.)
 Removing python3-wheel (0.42.0-2) ...
 [91m
-[0m[91mWARNING: [0m[91mapt[0m[91m does not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
-[0m[91m
-[0mRemoving intermediate container 556b5e523c08
- ---> 58c940876c14
+[0m[91mWARNING: [0m[91mapt [0m[91mdoes not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
+
+[0m ---> Removed intermediate container a0973f1223a3
+ ---> 671cc752321e
 Step 14/22 : RUN mkdir /home/ubuntu/.webstorage
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in a3a4b8aeb467
-Removing intermediate container a3a4b8aeb467
- ---> 97e2922c0e68
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 5c25fbc6c0b4
+ ---> Removed intermediate container 5c25fbc6c0b4
+ ---> fa70e79144e7
 Step 15/22 : COPY ./secret/webstorage.yml /home/ubuntu/.webstorage/webstorage.yml
- ---> aca753574f22
+ ---> 9216ba0d463a
 Step 16/22 : COPY ./secret/credentials.json /usr/src/app/credentials.json
- ---> fc3b6131d4df
+ ---> f45ee9d3d0d3
 Step 17/22 : COPY ./secret/photoslibrary.pickle /usr/src/app/photoslibrary.pickle
- ---> 24c00d25c01e
+ ---> ec1554d43970
 Step 18/22 : COPY ./build/tools.py /usr/src/app/tools.py
- ---> 895c4ce15e6e
+ ---> 1321ecdcb3a5
 Step 19/22 : COPY ./build/main.py /usr/src/app/main.py
- ---> dc79b5623779
+ ---> 0cef6bf4bc88
 Step 20/22 : RUN chown -R ubuntu /usr/src/app
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in 33261bc8933f
-Removing intermediate container 33261bc8933f
- ---> fa0360ccf0a9
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 46ec49f75f26
+ ---> Removed intermediate container 46ec49f75f26
+ ---> 88c843cad592
 Step 21/22 : USER ubuntu
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in c07f2356eab6
-Removing intermediate container c07f2356eab6
- ---> 1b82d177da62
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 8ccaca625e02
+ ---> Removed intermediate container 8ccaca625e02
+ ---> 51a9cb3bfd1b
 Step 22/22 : CMD ["python3", "/usr/src/app/main.py"]
- ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v2) and no specific platform was requested
- ---> Running in 3f3dc7911f9e
-Removing intermediate container 3f3dc7911f9e
- ---> 67748bc4277c
-Successfully built 67748bc4277c
-Successfully tagged registry.messner.click/gunny26/docker-google-fotos-sync:2024-11-30-b5ed8c5
-The push refers to repository [registry.messner.click/gunny26/docker-google-fotos-sync]
-b019296d48f4: Preparing
-538f11cbcb6b: Preparing
-e2e99921ed5d: Preparing
-01e833d3a357: Preparing
-c24a818ff60c: Preparing
-e7e4809cdb49: Preparing
-4509bb27833b: Preparing
-5316191e4efc: Preparing
-503a377e914f: Preparing
-7472f2a62c40: Preparing
-447cb7d8fa86: Preparing
-8e907f479223: Preparing
-69b0ede615b0: Preparing
-462d8a01bcfc: Preparing
-42c7cd6b7242: Preparing
-899e3cff1bc1: Preparing
-2d6b6e63aa2f: Preparing
-e7e4809cdb49: Waiting
-4509bb27833b: Waiting
-5316191e4efc: Waiting
-503a377e914f: Waiting
-7472f2a62c40: Waiting
-447cb7d8fa86: Waiting
-8e907f479223: Waiting
-69b0ede615b0: Waiting
-462d8a01bcfc: Waiting
-42c7cd6b7242: Waiting
-899e3cff1bc1: Waiting
-2d6b6e63aa2f: Waiting
-b019296d48f4: Pushed
-01e833d3a357: Pushed
-c24a818ff60c: Pushed
-538f11cbcb6b: Pushed
-e2e99921ed5d: Pushed
-e7e4809cdb49: Pushed
-7472f2a62c40: Pushed
-5316191e4efc: Pushed
-4509bb27833b: Pushed
-462d8a01bcfc: Mounted from gunny26/docker-google-drive-sync
-447cb7d8fa86: Pushed
-8e907f479223: Pushed
-69b0ede615b0: Pushed
-42c7cd6b7242: Mounted from gunny26/docker-google-drive-sync
-899e3cff1bc1: Mounted from gunny26/docker-google-drive-sync
-2d6b6e63aa2f: Mounted from gunny26/docker-google-drive-sync
-503a377e914f: Pushed
-2024-11-30-b5ed8c5: digest: sha256:cc2bf21e865920996ac9c9356c26ebe213b666798d3816c2ad98a5bc0dc1d98b size: 3866
-The push refers to repository [registry.messner.click/gunny26/docker-google-fotos-sync]
-b019296d48f4: Preparing
-538f11cbcb6b: Preparing
-e2e99921ed5d: Preparing
-01e833d3a357: Preparing
-c24a818ff60c: Preparing
-e7e4809cdb49: Preparing
-4509bb27833b: Preparing
-5316191e4efc: Preparing
-503a377e914f: Preparing
-7472f2a62c40: Preparing
-447cb7d8fa86: Preparing
-8e907f479223: Preparing
-69b0ede615b0: Preparing
-462d8a01bcfc: Preparing
-42c7cd6b7242: Preparing
-899e3cff1bc1: Preparing
-2d6b6e63aa2f: Preparing
-447cb7d8fa86: Waiting
-8e907f479223: Waiting
-4509bb27833b: Waiting
-5316191e4efc: Waiting
-503a377e914f: Waiting
-7472f2a62c40: Waiting
-899e3cff1bc1: Waiting
-69b0ede615b0: Waiting
-e7e4809cdb49: Waiting
-462d8a01bcfc: Waiting
-2d6b6e63aa2f: Waiting
-42c7cd6b7242: Waiting
-b019296d48f4: Layer already exists
-01e833d3a357: Layer already exists
-e2e99921ed5d: Layer already exists
-c24a818ff60c: Layer already exists
-538f11cbcb6b: Layer already exists
-7472f2a62c40: Layer already exists
-4509bb27833b: Layer already exists
-503a377e914f: Layer already exists
-5316191e4efc: Layer already exists
-e7e4809cdb49: Layer already exists
-462d8a01bcfc: Layer already exists
-8e907f479223: Layer already exists
-42c7cd6b7242: Layer already exists
-69b0ede615b0: Layer already exists
-447cb7d8fa86: Layer already exists
-899e3cff1bc1: Layer already exists
-2d6b6e63aa2f: Layer already exists
-stable: digest: sha256:cc2bf21e865920996ac9c9356c26ebe213b666798d3816c2ad98a5bc0dc1d98b size: 3866
+ ---> [Warning] The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
+ ---> Running in 4d53fc039be4
+ ---> Removed intermediate container 4d53fc039be4
+ ---> 04f4b2712f83
+Successfully built 04f4b2712f83
+Successfully tagged ghcr.io/gunny26/docker-google-fotos-sync:2025-05-24-3f7c750
+The push refers to repository [ghcr.io/gunny26/docker-google-fotos-sync]
+ae3ddfe05ad8: Preparing
+c1318322a22f: Preparing
+81e0d80ea8cd: Preparing
+227cc4d9cf60: Preparing
+223fd12328ec: Preparing
+fe7cb942abd0: Preparing
+39a5a141ea3b: Preparing
+f22618fd9c17: Preparing
+0334ceffedbf: Preparing
+78f2c1196196: Preparing
+b953615f0b8b: Preparing
+7fe7d1843e49: Preparing
+700e361f5534: Preparing
+bfda03fb88b0: Preparing
+9d54f584fcd0: Preparing
+c13143947cea: Preparing
+dcb77598f935: Preparing
+b953615f0b8b: Waiting
+7fe7d1843e49: Waiting
+700e361f5534: Waiting
+39a5a141ea3b: Waiting
+f22618fd9c17: Waiting
+fe7cb942abd0: Waiting
+bfda03fb88b0: Waiting
+9d54f584fcd0: Waiting
+c13143947cea: Waiting
+dcb77598f935: Waiting
+0334ceffedbf: Waiting
+78f2c1196196: Waiting
+ae3ddfe05ad8: Pushed
+81e0d80ea8cd: Pushed
+223fd12328ec: Pushed
+c1318322a22f: Pushed
+227cc4d9cf60: Pushed
+fe7cb942abd0: Pushed
+39a5a141ea3b: Pushed
+78f2c1196196: Pushed
+f22618fd9c17: Pushed
+b953615f0b8b: Pushed
+7fe7d1843e49: Pushed
+700e361f5534: Pushed
+bfda03fb88b0: Pushed
+0334ceffedbf: Pushed
+9d54f584fcd0: Pushed
+dcb77598f935: Pushed
+c13143947cea: Pushed
+2025-05-24-3f7c750: digest: sha256:97bfc145e85918316f1cfc7e7d02b90b70ccaeef4fc0d129c4fc2dfdaf534422 size: 3866
+The push refers to repository [ghcr.io/gunny26/docker-google-fotos-sync]
+ae3ddfe05ad8: Preparing
+c1318322a22f: Preparing
+81e0d80ea8cd: Preparing
+227cc4d9cf60: Preparing
+223fd12328ec: Preparing
+fe7cb942abd0: Preparing
+39a5a141ea3b: Preparing
+f22618fd9c17: Preparing
+0334ceffedbf: Preparing
+78f2c1196196: Preparing
+b953615f0b8b: Preparing
+7fe7d1843e49: Preparing
+700e361f5534: Preparing
+bfda03fb88b0: Preparing
+9d54f584fcd0: Preparing
+c13143947cea: Preparing
+dcb77598f935: Preparing
+b953615f0b8b: Waiting
+7fe7d1843e49: Waiting
+700e361f5534: Waiting
+bfda03fb88b0: Waiting
+fe7cb942abd0: Waiting
+9d54f584fcd0: Waiting
+dcb77598f935: Waiting
+c13143947cea: Waiting
+0334ceffedbf: Waiting
+39a5a141ea3b: Waiting
+f22618fd9c17: Waiting
+78f2c1196196: Waiting
+223fd12328ec: Layer already exists
+c1318322a22f: Layer already exists
+81e0d80ea8cd: Layer already exists
+ae3ddfe05ad8: Layer already exists
+227cc4d9cf60: Layer already exists
+39a5a141ea3b: Layer already exists
+fe7cb942abd0: Layer already exists
+0334ceffedbf: Layer already exists
+f22618fd9c17: Layer already exists
+78f2c1196196: Layer already exists
+7fe7d1843e49: Layer already exists
+b953615f0b8b: Layer already exists
+700e361f5534: Layer already exists
+9d54f584fcd0: Layer already exists
+bfda03fb88b0: Layer already exists
+dcb77598f935: Layer already exists
+c13143947cea: Layer already exists
+stable: digest: sha256:97bfc145e85918316f1cfc7e7d02b90b70ccaeef4fc0d129c4fc2dfdaf534422 size: 3866
