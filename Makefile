@@ -35,7 +35,8 @@ stable:
 	git commit -a -m "automatic pre deployment commit"
 	echo "using $(DATESTRING)-$(TAG)"
 	# docker build --no-cache --platform $(PLATFORM) -t $(IMAGE_NAME) .
-	docker buildx build --platform $(PLATFORM_STABLE),$(PLATFORM_LATEST) --push -t $(IMAGE_NAME) .
+	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME),$(IMAGE_NAME_STABLE) .
+	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME),$(IMAGE_NAME_STABLE) .
 	git push origin main
 
 lint:
