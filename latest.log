@@ -1,5 +1,10 @@
-ghcr.io/gunny26/docker-google-fotos-sync:2025-05-24-75cf568
-[latest 8ac676e] automatic pre latest image built commit
- 3 files changed, 493 insertions(+), 227 deletions(-)
- delete mode 100644 stable.tmp
-using 2025-05-24-75cf568
+ghcr.io/gunny26/docker-google-fotos-sync:2025-05-24-cd6f378
+Auf Branch latest
+Unversionierte Dateien:
+  (benutzen Sie "git add <Datei>...", um die Änderungen zum Commit vorzumerken)
+	.flake8
+	latest.tmp
+
+nichts zum Commit vorgemerkt, aber es gibt unversionierte Dateien
+(benutzen Sie "git add" zum Versionieren)
+using 2025-05-24-cd6f378
