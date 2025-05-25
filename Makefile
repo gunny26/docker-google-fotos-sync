@@ -21,16 +21,15 @@ test:
 
 latest:
 	git checkout latest
-	git status || git commit -a -m "automatic latest image built commit"
+	git add . || git commit -a -m "automatic latest image built commit"
 	git push origin latest
 	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_LATEST)"
 	docker buildx build --platform $(PLATFORM_LATEST) --push -t $(IMAGE_NAME) -t $(IMAGE_NAME_LATEST) .
 
 stable:
 	git checkout main
-	git pull latest
-	git status || git commit -a -m "automatic stable built commit"
-	git push origin main
+	git pull origin main
+	git merge latest
 	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_STABLE)"
 	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME) -t $(IMAGE_NAME_STABLE) .
 	# back to latest
