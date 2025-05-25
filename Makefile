@@ -15,26 +15,20 @@ export IMAGE_NAME ?= $(REGISTRY):$(DATESTRING)-$(TAG)
 export IMAGE_NAME_LATEST ?= $(REGISTRY):latest
 export IMAGE_NAME_STABLE ?= $(REGISTRY):stable
 
-testrun:
-	export APP_REDIS_HOST=redis-lmp.messner.click
-	export APP_INTERFACE=wlp4s0
-	sudo python3 build/main.py
+test:
+	docker compose up -d && docker compose down
 
 latest:
-	echo $(IMAGE_NAME)
+	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_LATEST)"
 	git commit -a -m "automatic pre latest image built commit"
-	echo "using $(DATESTRING)-$(TAG)"
-	docker buildx build --platform $(PLATFORM_LATEST) --push -t "$(IMAGE_NAME) $($IMAGE_NAME_LATEST)" .
+	docker buildx build --platform $(PLATFORM_LATEST) --push -t $(IMAGE_NAME) -t $($IMAGE_NAME_LATEST) .
 	# docker tag $(IMAGE_NAME) $(IMAGE_NAME_LATEST)
 	git commit -a -m "automatic post latest image built"
 
 stable:
-	echo $(IMAGE_NAME)
-	git commit -a -m "automatic pre deployment commit"
-	echo "using $(DATESTRING)-$(TAG)"
-	# docker build --no-cache --platform $(PLATFORM) -t $(IMAGE_NAME) .
-	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME_STABLE) .
-	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME_STABLE) .
+	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_STABLE)"
+	git commit -a -m "automatic pre stable commit"
+	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME) -t $(IMAGE_NAME_STABLE) .
 	git push origin main
 
 lint:
