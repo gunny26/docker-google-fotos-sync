@@ -21,7 +21,7 @@ test:
 latest:
 	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_LATEST)"
 	git commit -a -m "automatic pre latest image built commit"
-	docker buildx build --platform $(PLATFORM_LATEST) --push -t $(IMAGE_NAME) -t $($IMAGE_NAME_LATEST) .
+	docker buildx build --platform $(PLATFORM_LATEST) --push -t $(IMAGE_NAME) -t $(IMAGE_NAME_LATEST) .
 	# docker tag $(IMAGE_NAME) $(IMAGE_NAME_LATEST)
 	git commit -a -m "automatic post latest image built"
 
