@@ -16,6 +16,7 @@ export IMAGE_NAME_LATEST ?= $(REGISTRY):latest
 export IMAGE_NAME_STABLE ?= $(REGISTRY):stable
 
 test:
+	# needs docker-compose-v2 to be installed
 	docker compose up -d && docker compose down
 
 latest:
@@ -36,4 +37,4 @@ lint:
 	ruff format build/main.py
 
 clean:
-	docker buildx build prune
+	docker buildx prune

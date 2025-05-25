@@ -1,5 +1,3 @@
-version: "2.4"
-
 services:
     fotos-sync:
         image: registry.messner.click/gunny26/docker-google-fotos-sync:latest
