@@ -1,6 +1,6 @@
 services:
     fotos-sync:
-        image: registry.messner.click/gunny26/docker-google-fotos-sync:latest
+        image: ghcr.io/gunny26/docker-google-fotos-sync:latest
         container_name: fotos-sync
         environment:
             APP_AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}

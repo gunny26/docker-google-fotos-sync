@@ -7,6 +7,7 @@ export GITHUB_GHCR ?= ghcr.io
 export GITHUB_USERNAME ?= gunny26
 export REPOSITORY_NAME ?= $(shell pwd | rev | cut -d/ -f 1 | rev)
 
+export DESCRIPTION ?= $(shell cat ./TITLE)
 export DATESTRING ?= $(shell date -I)
 export TAG ?= $(shell git describe --always)
 
@@ -23,15 +24,34 @@ latest:
 	git checkout latest
 	git add . || git commit -a -m "automatic latest image built commit"
 	git push origin latest
-	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_LATEST)"
-	docker buildx build --platform $(PLATFORM_LATEST) --push -t $(IMAGE_NAME) -t $(IMAGE_NAME_LATEST) .
+	echo "building image tag $(IMAGE_NAME) and $(IMAGE_NAME_LATEST)"
+	docker buildx build \
+ 	--label "org.opencontainers.image.source=https://github.com/$(GITHUB_USERNAME)/$(REPOSITORY_NAME)" \
+ 	--label "org.opencontainers.image.description=My container $(REPOSITORY_NAME)" \
+ 	--label "org.opencontainers.image.licenses=MIT" \
+	--label "org.opencontainers.image.description=$(DESCRIPTION)" \
+	--platform $(PLATFORM_LATEST) \
+	--tag $(IMAGE_NAME) \
+	--tag $(IMAGE_NAME_LATEST) \
+	--push \
+	.
 
 stable:
 	git checkout main
 	git pull origin main
 	git merge latest
-	echo "Image Tag $(IMAGE_NAME) and $(IMAGE_NAME_STABLE)"
-	docker buildx build --platform $(PLATFORM_STABLE) --push -t $(IMAGE_NAME) -t $(IMAGE_NAME_STABLE) .
+	echo "building image tag $(IMAGE_NAME) and $(IMAGE_NAME_STABLE)"
+	docker buildx build \
+ 	--label "org.opencontainers.image.source=https://github.com/$(GITHUB_USERNAME)/$(REPOSITORY_NAME)" \
+ 	--label "org.opencontainers.image.description=My container $(REPOSITORY_NAME)" \
+ 	--label "org.opencontainers.image.licenses=MIT" \
+	--label "org.opencontainers.image.description=$(DESCRIPTION)" \
+	--platform $(PLATFORM_LATEST) \
+	--platform $(PLATFORM_STABLE) \
+	--tag $(IMAGE_NAME) \
+	--tag $(IMAGE_NAME_STABLE) \
+	--push \
+	.
 	# back to latest
 	git checkout latest
 
